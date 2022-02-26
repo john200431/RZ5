@@ -489,11 +489,6 @@ if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button 
             }).catch((err) => reply(`🤲 Server eror`))
             
              break
-case 'tiktok':
-if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
-sendButLocation(from, 'Silahkan pilih media yang ingin kamu download', '© ' + ownername, thumbnail, [{buttonId: `.tiktokwm ${q}`, buttonText: {displayText: 'WM'}, type: 1},{buttonId: `.tiktoknowm ${q}`, buttonText:{displayText: 'NOWM'}, type: 1},{buttonId: `.tiktokmusic ${q}`, buttonText:{displayText: 'AUDIO'}, type: 1}], {quoted: mek})
-						
-             break
 case 'tiktoknowm':   
 if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
 			if (!q) return reply('Linknya?')
@@ -680,16 +675,6 @@ case 'nhentai':{
     ini_txt += `Pages : ${get_info.pages}\n`
     ini_txt += `Uploaded : ${get_info.uploaded}\n`
     reply(ini_txt)}
-    break
- case 'nhentaipdf':{
- 	if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
-    if (args.length == 0) return reply(`Example: ${prefix + command} 344253`)
-    henid = args[0]
-    get_result = await fetchJson(`https://api.lolhuman.xyz/api/nhentaipdf/${henid}?apikey=${lolkey}`)
-    get_result = get_result.result
-    ini_buffer = await getBuffer(get_result)
-    await haruka.sendMessage(from, ini_buffer, document, { quoted: mek, mimetype: Mimetype.pdf, filename: `${henid}.pdf` })
-    }
     break
 case 'nhentaisearch':{
 	if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
@@ -1187,34 +1172,6 @@ case 'nuliskiri':{
 										})
 									}
 									break
-						case 'foliokanan':{
-									if (args.length < 1) return reply(`Kirim perintah *${prefix}foliokanan* teks`)
-									reply(lang.wait())
-									const tulisan = q
-									const splitText = tulisan.replace(/(\S+\s*){1,13}/g, '$&\n')
-									const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
-									spawn('convert', [
-									'./database/media/nulis/images/folio/sebelumkanan.jpg',
-									'-font',
-									'./database/media/nulis/font/Indie-Flower.ttf',
-									'-size',
-									'960x1280',
-									'-pointsize',
-									'23',
-									'-interline-spacing',
-									'3',
-									'-annotate',
-									'+89+190',
-									fixHeight,
-									'./database/media/nulis/images/folio/setelahkanan.jpg'
-									])
-									.on('error', () => reply(mess.error))
-									.on('exit', () => {
-										haruka.sendMessage(from, fs.readFileSync('./database/media/nulis/images/folio/setelahkanan.jpg'), image, {thumbnail:Buffer.alloc(0),quoted: mek, caption: `Hati-hati ketahuan!`})
-										
-									})
-									}
-									break
 									case 'facebook': case 'fb': case 'fbdl': case 'facebookdl':{
 	if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
                 if(!q)return reply(`Example : ${prefix + command} link Facebook`)
@@ -1235,24 +1192,6 @@ try{
 } 
    }          
              break
-   case 'soundcloud':
-	if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
-                if(!q)return reply(`Example : ${prefix + command} link SoundCloud`)
-                if (!q.includes('m.soundcloud.com')) return reply('Itu bukan link SoundCloud')
-                await reply(lang.wait())
-				zee.SoundCloud(`${q}`).then(async (data) => {
-                    let txt = `*----「 SOUNDCLOUD DOWNLOAD 」----*\n\n`
-                    txt += `*• Title :* ${data.title}\n`
-                    txt += `*• Duration :* ${data.duration}\n`
-					txt += `*• Quality :* ${data.medias[1].quality}\n`
-					txt += `*• Ext :* ${data.medias[0].extension}\n`
-                    txt += `*• Size :* ${data.medias[0].formattedSize}\n`
-                    txt += `*• Url  :* ${data.url}\n\n`
-                    txt += `*Mohon tunggu sebentar, sedang proses pengiriman...*`
-                    sendFileFromUrl(from, data.thumbnail, txt, mek)
-                    haruka.sendMessage(from , await getBuffer(data.medias[0].url), audio,{ quoted: mek, mimetype: 'audio/mp4' })
-				})
-			break
 	case 'telesticker': case 'tstiker': {
 		if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
 			if (!isGroup) return reply(lang.group())
@@ -1316,24 +1255,7 @@ if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button 
                     sendFileFromUrl(from, data.medias[7].url, '', mek)
                 })
                 }
-             break
-case 'ytmp4': {
-if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
-			if (args.length === 0) return reply(`Kirim perintah *${prefix}ytmp3* _Url YouTube_`)
-			if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply('Link tidak valid!')
-			var mulaikah = args.join(' ')
-			zee.Youtube(mulaikah).then(async (data) => {
-                    let txt = `*----「 YOUTUBE VIDEO 」----*\n\n`
-                    txt += `*• Quality :* ${data.medias[1].quality}\n`
-                    txt += `*• Type :* ${data.medias[1].extension}\n`
-                    txt += `*• Size :* ${data.medias[1].formattedSize}\n`
-                    txt += `*• Url Source :* ${data.url}\n\n`
-                    txt += `_Mohon tunggu sebentar , uploading media..._`
-                    sendFileFromUrl(from, data.thumbnail, txt, mek)
-                    sendFileFromUrl(from, data.medias[1].url, '', mek)                    
-                })
-                }
-             break                         
+             breaK                        
 //No Categori
 case 'getpp':
 if (!isHaruka) return sendButMessage(from, lang.noregis(pushname), `Klik Button Untuk Verify`, [{buttonId: '.daftar',buttonText: {displayText: `Daftar`,},type: 1,}], {quoted: fgif});
